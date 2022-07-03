@@ -64,13 +64,25 @@ const nuevoArray = profesores.map(callback);
 // a este metodo le asigno una funcion
 // que termino agregando un metodo a la api de js (Array)
 // NO SE ESTA CREANDO UNA API NUEVA
-// this estará apuntando al array que invocanco el metodo
+// this estará apuntando al array que invocanco el metodo: profesores
+// this es una palabra que referencia (en este ejemplo), nos dá acceso al
+// array sobre el que ejecuto el método, en este ejemplo this reemplaza a profesores
+// o reemplaza a arrayNumeros, segun el caso.
+
+
+Array.prototype.myMap = function() {
+    console.log('Este es el array sobre el cual ejecuto el método',this);
+    
+}
 
 const nuevoArrayConMetodoNuevoAPI = profesores.myMap();
 
-Array.prototype.myMap = function() {
-    console.log(this);
-}
+const arrayNumeros = [1,2,3,4];
+const nuevoArrayConMetodoNuevoAPI2=arrayNumeros.myMap();
+
+
+
+
 
 
 // profesores.map(elemento => {
