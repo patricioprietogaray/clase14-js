@@ -38,6 +38,7 @@ const profesores = [
 
 // con map se puede retornar en un nuevo array, con forEach no.
 
+//                  item        index       array
 function callback(profesores, posicion, profesoresArray) {
     const nuevoObjeto = {
         cadena: `Hola, soy ${profesores.profesion}, mi nombre es ${profesores.nombre} y tengo ${profesores.edad} años.`, 
@@ -71,18 +72,45 @@ const nuevoArray = profesores.map(callback);
 
 
 Array.prototype.myMap = function() {
-    console.log('Este es el array sobre el cual ejecuto el método',this);
+    // console.log('Este es el array sobre el cual ejecuto el método',this);
+
+    // map genera un nuevo array y lo retorna
+
+    const arrayNovo = [];
+
+    // de donde sale la info que llenará arrayNovo? de profesores
+    // y como lo referenciamos a profesores? Rta con this. 
+    //(desde profesores.myMap();)
+
+    // recorre el array con for
+    for(let i = 0; i < this.length; i++) {
+        // console.log(this);
+
+        // profesores usa el método myMap y es llamada la api que se 
+        // construye aqui; recibe el array de profesores como argumento
+        // de la funcion y hacemos referencia a profesores con la palabra this
+        // y por ultimo hago una copia de profesores con push (pasando el callback)
+        // por cada item.
+        const retornoDelCallback = this[i];
+        arrayNovo.push(retornoDelCallback);
+        // console.log(this[i]);   
+    }
+
+    return arrayNovo;
+
     
 }
 
 const nuevoArrayConMetodoNuevoAPI = profesores.myMap();
+// const nuevoArrayConMetodoNuevoAPI = profesores.map;
 
 const arrayNumeros = [1,2,3,4];
 const nuevoArrayConMetodoNuevoAPI2=arrayNumeros.myMap();
 
+console.log('el array devuelto es: ',nuevoArrayConMetodoNuevoAPI);
 
 
-
+// clase 14 break del video 
 
 
 // profesores.map(elemento => {
