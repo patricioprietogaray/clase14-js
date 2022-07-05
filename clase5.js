@@ -174,3 +174,215 @@ const nombresMyMap = profesores.myMap();
 console.log("funcion myMap");
 console.log(nombresMyMap);
 ////////////////////////////////////////////
+
+//////////////////////////////////////////
+///////MAP
+
+
+const profesores = [
+    {nombre:'Patricia Fosco',
+    edad:'35',
+    profesion:'Profesora',},
+
+    {nombre:'Melina Zanni',
+    edad:'38',
+    profesion:'Profesora',},
+    
+    {nombre:'Federico Coria',
+    edad:'34',
+    profesion:'Preceptor',},
+    
+    {nombre:'Cintia',
+    edad:'35',
+    profesion:'Coordinadora',}
+]
+
+
+
+// console.log(profesores);
+const cadena = profesores;
+
+// NO FUNCIONA LLAMANDO DIRECTAMENTE A LA FUNCION, FALTA EL PROTOTIPO... 
+// const devolucionMostrarArray = mostrarArray(cadena,0,profesores);
+// console.log(devolucionMostrarArray);
+
+// this hace referencia a al array que se le pasa  llamado en 1
+
+
+//  2. leo mapeado y por cada iteracíon en push voy a 3
+Array.prototype.mapeado = function(mostrarArray) {  //mostrarArray se define en function
+    const arrayNovo=[];
+    for(let i = 0; i < this.length; i++) {
+        
+        //                   itemDelArray  index  array
+        arrayNovo.push(mostrarArray(this[i], i, this));
+        // seria igual a: const devuelveArray = mostrarArray; 
+        //                arrayNovo.push(devuelveArray);
+
+    }
+    return arrayNovo;
+    // this es el array
+    // i es la posicion
+    // this[i] es el ojeto especifico donde buscar la informacion
+}
+
+
+// 3. devuelvo el objeto iterado
+//                  itemDelArray  index    array
+function mostrarArray(profesor, posicion, Profesores) {
+    const nuevoObjeto = {
+        string: `Hola soy ${profesor.profesion}`,
+        posicion: posicion,
+        perteneceA: profesores,
+    };
+    return nuevoObjeto;
+    // return 'hola';
+}
+
+// 1. llamo a la api agregada mapeado
+const profesoresMapeados = profesores.mapeado(mostrarArray);
+console.log(profesoresMapeados);
+
+
+
+// uso mapeado con otra cosa
+
+const numeros=[1,2,3,4,5];
+
+/* 
+Paso la funcion:
+function (numero) {
+    return `Soy el número ${numero}.`
+}
+mapeado en realidad es un bucle que encierra a la funcion anterior
+*/
+const numMapeados = numeros.mapeado(numero => `Soy el número ${numero}.`);
+
+console.log(numMapeados);
+
+////////////
+/////FILTER
+//////////////////////////////////////////
+////////////Filter
+
+
+const profesores = [
+    {nombre:'Patricia Fosco',
+    edad: 35,
+    profesion:'Profesora',},
+
+    {nombre:'Melina Zanni',
+    edad: 38,
+    profesion:'Profesora',},
+    
+    {nombre:'Federico Coria',
+    edad: 34,
+    profesion:'Preceptor',},
+    
+    {nombre:'Cintia',
+    edad: 25,
+    profesion:'Coordinadora',}
+]
+
+//                            item         entero
+// function funcionMenorTreinta(profesor) {
+    // if (profesor.edad < 30) {return true;} // los que son true se muestran
+// }
+
+// const profesoresMenoresTreinta = profesores.filter(funcionMenorTreinta);
+// console.log(profesoresMenoresTreinta);
+
+//                            item      String
+// function funcionProfesion(profesor) {
+//     if (profesor.profesion == 'Profesora') {return true;} // los que son true se muestran
+// }
+
+// const profesorasDelInstituto = profesores.filter(funcionProfesion);
+// console.log(profesorasDelInstituto);
+
+//                            item      parte de un String
+
+// function funcionsProfesion(profesor) {
+    // if (profesor.nombre.includes('Coria')) {return true;} // los que son true se muestran
+    // return profesor.nombre.includes('Coria'); // esta implicito el if y el return true
+// }
+
+// const profesorDelInstituto = profesores.filter(funcionsProfesion);
+// console.log(profesorDelInstituto);
+
+const profesores = [
+    {nombre:'Patricia Fosco',
+    edad: 35,
+    profesion:'Profesora',},
+
+    {nombre:'Melina Zanni',
+    edad: 38,
+    profesion:'Profesora',},
+    
+    {nombre:'Federico Coria',
+    edad: 34,
+    profesion:'Preceptor',},
+    
+    {nombre:'Cintia',
+    edad: 25,
+    profesion:'Coordinadora',}
+]
+
+Array.prototype.filtrar= function(condicion) {
+    const nuevoArray = [];
+    for(let i=0; i < this.length; i++){
+        if(condicion(this[i], i, this) === true){
+            nuevoArray.push(this[i]);
+        }
+    }
+    // console.log(nuevoArray);
+    return nuevoArray;
+    
+}
+
+const menoresDeTreintaCinco=profesores.filtrar(profesores => profesores.edad < 35);
+console.log(menoresDeTreintaCinco);
+
+//////////////
+// Reduce 2.0
+
+const numeros = [1,2,3,4,5,6,7,8,9];
+
+function callback(acumulador, numero) {
+    return acumulador + numero;
+}
+
+console.log(numeros.reduce(callback,'0'));
+
+///////////////reductor
+const numeritos = [1,2,3,4,5,6,7,8,9];
+
+
+Array.prototype.reductor=function(callback, inicio) {
+    let acumularrayAlPrincipio=[];
+    let elementoActualOrigen;
+    for(let i=0; i<this.length; i++) {
+        if(i == 0){
+            acumularrayAlPrincipio.push(inicio);
+        }  
+        elementoActualOrigen=this[i];
+        callback(inicio, elementoActualOrigen);
+        acumularrayAlPrincipio.push(callback(inicio, elementoActualOrigen));        
+    }
+    let aDevolver;
+    for(let i=0; i<acumularrayAlPrincipio.length; i++) {
+        if (i==0) { aDevolver =`${acumularrayAlPrincipio[i]} `;}
+        aDevolver =aDevolver + `${acumularrayAlPrincipio[i]} `;
+
+    }
+    return aDevolver;
+}
+
+function callback(acumulador, numero) {
+    return acumulador + numero;
+}
+
+
+console.log(numeritos.reductor(callback,25));
+
+//////////
