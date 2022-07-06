@@ -386,3 +386,63 @@ function callback(acumulador, numero) {
 console.log(numeritos.reductor(callback,25));
 
 //////////
+// const usuarios = [
+//     ['Agustin', '23', 'Profesor'],
+//     ['Oriana',  '31', 'Enfermera'],
+//     ['Martina', '19', 'Mecánica'],
+//     ['Omar',    '27', 'Soldado'],
+// ]
+
+// /* a partir del array construir un objeto*/
+// //                            item del array
+// function callback(acumulador, persona) {
+//     // acumulador equivale al objeto {nombres: [], edades: [], profesiones: [] }
+//     // persona equivale a cada item por separado
+//     const nombre = persona[0];
+//     const edad = persona[1];
+//     const profesiones = persona[2];
+
+    
+//     acumulador = acumulador + `{ ${nombre} , ${edad}, ${profesiones} },`;
+//     return acumulador;
+//     // console.log(nombre);
+// }
+// //                                                          quiero crear un objeto definidos 
+// const usuariosReducidos = usuarios.reduce(callback, { nombres: [], edades: [], profesiones: [] } );
+// console.log(usuariosReducidos);
+
+
+// version del profesor
+// const usuarios = [
+//     ['Agustin', '23', 'Profesor'],
+//     ['Oriana',  '31', 'Enfermera'],
+//     ['Martina', '19', 'Mecánica'],
+//     ['Omar',    '27', 'Soldado'],
+// ]
+
+/* a partir del array construir un objeto*/
+//                            item del array
+// function callback(acumulador, persona) {
+    // acumulador equivale al objeto {nombres: [], edades: [], profesiones: [] }
+    // persona equivale a cada item por separado
+    // console.log('acumulador es ',acumulador);
+    // console.log(persona);
+
+
+    // const nombre = persona[0];
+    // const edad = persona[1];
+    // const profesiones = persona[2];
+    
+
+    // return {  };
+
+// }
+//                                                          quiero crear un objeto definidos 
+// const usuariosReducidos = usuarios.reduce(callback);//{ 0 } );
+// console.log(usuariosReducidos);
+
+/*
+el reduce recibe un callback y ese callback
+*/
+
+///////////////
