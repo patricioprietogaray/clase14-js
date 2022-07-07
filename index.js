@@ -15,16 +15,48 @@
 //    6   +   4    =    10
 //    10   +  5    =    15
 
-const numeros=[1,2,3,4,5];
+// const numeros=[1,2,3,4,5];
 
-function callback(acumulador, numero) {
-    return acumulador + numero;
+// function callback(acumulador, numero) {
+//     return acumulador + numero;
+// }
+
+// const suma = numeros.reduce(callback, 0);
+
+// console.log(suma);
+
+/////
+
+const usuarios = [
+    //  [0]     [1]    [2]
+    ['Agustin', '23', 'Profesor'],
+    ['Oriana',  '31', 'Enfermera'],
+    ['Martina', '19', 'Mecánica'],
+    ['Omar',    '27', 'Soldado'],
+]
+
+function callback(acumulador, datoRecibidoUsuario) {
+    const nombre = datoRecibidoUsuario[0];
+    const edad = datoRecibidoUsuario[1];
+    const profesion = datoRecibidoUsuario[2];
+
+    // por cada iteracion mostrara cada array (individual dentro de personas)
+    // console.log(nombre, edad, profesion );
+
+    // spread operator ...     usuarios viene del valor que le pasa reduce a callback
+    //                          y nombre es el dato recibido del array usuarios segun indice
+    return { usuarios: [...acumulador.usuarios, nombre], 
+        edades: [...acumulador.edades, edad], 
+            profesiones: [...acumulador.profesiones, profesion] } ;
+    // la primera iteracion se pasan los datos iniciales
+    // de la segunda hasta la ultima se pasan el objeto {}
+    // que retorno ? los arrays que voy generando 
+    // { usuarios: [], edades: [], profesiones: [] }
 }
 
-const suma = numeros.reduce(callback, 0);
+// el reduce buclea a la funcion callback y como inicio (en vez de cero) crea arrays vacios
+// para que sean "llenados" cuando se recorre el array usuarios.
+const usuariosReducidos = usuarios.reduce(callback, { usuarios: [], edades: [], profesiones: [] });
 
-console.log(suma);
-
-
-
+console.log(usuariosReducidos);
 
